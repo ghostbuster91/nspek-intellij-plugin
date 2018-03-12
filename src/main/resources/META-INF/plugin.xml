@@ -1,0 +1,17 @@
+<idea-plugin>
+    <id>io.ghostbuster91.nspek-intellij-plugin</id>
+    <name>NSpek Intellij Plugin</name>
+    <vendor email="kghost0@gmail.com" url="http://github.com/ghostbuster91">Ghostbuster91</vendor>
+    <idea-version since-build="145" until-build="173.4301.14"/>
+    <description>TBD</description>
+
+    <change-notes>
+    </change-notes>
+
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <configurationType implementation="io.ghostbuster91.nspekplugin.NSpekConfigurationType"/>
+    </extensions>
+
+</idea-plugin>

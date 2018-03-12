@@ -10,9 +10,13 @@ buildscript {
 }
 
 plugins {
-    id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.2.30'
+    id 'org.jetbrains.kotlin.jvm' version '1.1.4-3'
     id "org.jetbrains.intellij" version "0.2.18"
+}
+
+intellij {
+    version = "IC-173.4301.14"
+    pluginName = "nspek-integration"
 }
 
 group 'io.github.ghostbuster91'
@@ -26,8 +30,15 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-stdlib"
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+sourceSets {
+    main{
+        java {
+            srcDir 'src/main/kotlin'
+        }
+    }
 }
 
 compileKotlin {
