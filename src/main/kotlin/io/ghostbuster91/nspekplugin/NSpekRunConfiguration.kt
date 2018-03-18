@@ -4,11 +4,17 @@ import com.intellij.execution.Executor
 import com.intellij.execution.configurations.*
 import com.intellij.execution.filters.TextConsoleBuilderFactory
 import com.intellij.execution.runners.ExecutionEnvironment
+import com.intellij.openapi.module.Module
+import com.intellij.openapi.module.ModuleManager
 import com.intellij.openapi.options.SettingsEditor
-import com.intellij.openapi.project.Project
+import java.util.*
 
-class NSpekRunConfiguration(name: String, project: Project, configurationFactory: ConfigurationFactory)
-    : LocatableConfigurationBase(project, configurationFactory, name) {
+class NSpekRunConfiguration(name: String, javaRunConfigurationModule: JavaRunConfigurationModule, configurationFactory: ConfigurationFactory)
+    : ModuleBasedConfiguration<JavaRunConfigurationModule>(name, javaRunConfigurationModule, configurationFactory) {
+
+    override fun getValidModules(): MutableCollection<Module> {
+        return Arrays.asList(*ModuleManager.getInstance(project).modules)
+    }
 
     override fun getConfigurationEditor(): SettingsEditor<out RunConfiguration> {
         return NSpekSettingsEditor()
@@ -23,4 +29,6 @@ class NSpekRunConfiguration(name: String, project: Project, configurationFactory
             consoleBuilder = TextConsoleBuilderFactory.getInstance().createBuilder(project)
         }
     }
+
+    var testPath: String? = null
 }
