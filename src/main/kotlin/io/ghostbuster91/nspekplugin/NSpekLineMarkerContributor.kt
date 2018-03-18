@@ -10,7 +10,6 @@ import org.jetbrains.kotlin.idea.references.mainReference
 import org.jetbrains.kotlin.idea.util.findAnnotation
 import org.jetbrains.kotlin.lexer.KtToken
 import org.jetbrains.kotlin.name.FqName
-import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtNamedFunction
 import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 import org.jetbrains.kotlin.psi.psiUtil.getParentOfType
@@ -53,9 +52,4 @@ fun isIdentifier(element: PsiElement): Boolean {
         }
     }
     return false
-}
-
-fun isJUnit4(cls: KtClassOrObject): Boolean {
-    val fqName = FqName("org.junit.runner.RunWith")
-    return cls.findAnnotation(fqName) != null
 }
