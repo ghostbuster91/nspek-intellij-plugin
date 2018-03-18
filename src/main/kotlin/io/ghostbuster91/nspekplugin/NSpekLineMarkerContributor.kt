@@ -22,26 +22,15 @@ class NSpekLineMarkerContributor : RunLineMarkerContributor() {
     override fun getInfo(element: PsiElement): Info? {
         if (isIdentifier(element)) {
             val parent = element.parent
-            when (parent) {
-                is KtClassOrObject -> {
-                    if (isJUnit4(parent)) {
+            if (parent is KtSimpleNameExpression) {
+                val classLevelFunction = parent.getParentOfType<KtNamedFunction>(true)
+                if (classLevelFunction?.findAnnotation(NSPEK_TEST_ANNOTATION) != null) {
+                    if (parent.mainReference.resolve()?.getKotlinFqName() == NSPEK_METHOD_CONTEXT_INVOCATION) {
                         return Info(
                                 AllIcons.RunConfigurations.TestState.Run,
                                 TOOLTIP_PROVIDER,
                                 *ExecutorAction.getActions(0)
                         )
-                    }
-                }
-                is KtSimpleNameExpression -> {
-                    val classLevelFunction = parent.getParentOfType<KtNamedFunction>(true)
-                    if (classLevelFunction?.findAnnotation(NSPEK_TEST_ANNOTATION) != null) {
-                        if (parent.mainReference.resolve()?.getKotlinFqName() == NSPEK_METHOD_CONTEXT_INVOCATION) {
-                            return Info(
-                                    AllIcons.RunConfigurations.TestState.Run,
-                                    TOOLTIP_PROVIDER,
-                                    *ExecutorAction.getActions(0)
-                            )
-                        }
                     }
                 }
             }
