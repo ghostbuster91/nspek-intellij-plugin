@@ -8,10 +8,12 @@
     <change-notes>
     </change-notes>
 
+    <depends>org.jetbrains.kotlin</depends>
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <configurationType implementation="io.ghostbuster91.nspekplugin.NSpekConfigurationType"/>
+        <runLineMarkerContributor language="kotlin" implementationClass="io.ghostbuster91.nspekplugin.NSpekLineMarkerContributor"/>
     </extensions>
 
 </idea-plugin>

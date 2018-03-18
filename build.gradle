@@ -15,8 +15,9 @@ plugins {
 }
 
 intellij {
-    version = "IC-173.4301.14"
+    version = '2016.3'
     pluginName = "nspek-integration"
+    plugins = ['org.jetbrains.kotlin:1.1.51-release-IJ2016.3-1']
 }
 
 group 'io.github.ghostbuster91'
