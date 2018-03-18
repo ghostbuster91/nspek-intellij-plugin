@@ -11,8 +11,9 @@ import org.jetbrains.kotlin.idea.util.findAnnotation
 import org.jetbrains.kotlin.lexer.KtToken
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.KtClassOrObject
-import org.jetbrains.kotlin.psi.KtElement
+import org.jetbrains.kotlin.psi.KtNamedFunction
 import org.jetbrains.kotlin.psi.KtSimpleNameExpression
+import org.jetbrains.kotlin.psi.psiUtil.getParentOfType
 
 class NSpekLineMarkerContributor : RunLineMarkerContributor() {
 
@@ -32,12 +33,15 @@ class NSpekLineMarkerContributor : RunLineMarkerContributor() {
                     }
                 }
                 is KtSimpleNameExpression -> {
-                    if (parent.mainReference.resolve()?.getKotlinFqName()?.asString() == "com.elpassion.nspek.NSpekMethodContext.o") {
-                        return Info(
-                                AllIcons.RunConfigurations.TestState.Run,
-                                TOOLTIP_PROVIDER,
-                                *ExecutorAction.getActions(0)
-                        )
+                    val classLevelFunction = parent.getParentOfType<KtNamedFunction>(true)
+                    if (classLevelFunction?.findAnnotation(NSPEK_TEST_ANNOTATION) != null) {
+                        if (parent.mainReference.resolve()?.getKotlinFqName() == NSPEK_METHOD_CONTEXT_INVOCATION) {
+                            return Info(
+                                    AllIcons.RunConfigurations.TestState.Run,
+                                    TOOLTIP_PROVIDER,
+                                    *ExecutorAction.getActions(0)
+                            )
+                        }
                     }
                 }
             }
@@ -45,6 +49,10 @@ class NSpekLineMarkerContributor : RunLineMarkerContributor() {
         return null
     }
 
+    companion object {
+        val NSPEK_TEST_ANNOTATION = FqName("com.elpassion.nspek.Test")
+        val NSPEK_METHOD_CONTEXT_INVOCATION = FqName("com.elpassion.nspek.NSpekMethodContext.o")
+    }
 }
 
 fun isIdentifier(element: PsiElement): Boolean {
