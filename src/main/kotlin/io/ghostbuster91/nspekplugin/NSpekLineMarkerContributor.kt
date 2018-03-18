@@ -32,7 +32,7 @@ class NSpekLineMarkerContributor : RunLineMarkerContributor() {
                     }
                 }
                 is KtSimpleNameExpression -> {
-                    if ((parent as KtElement).mainReference?.resolve()?.getKotlinFqName()?.asString() == "com.elpassion.nspek.NSpekMethodContext.o") {
+                    if (parent.mainReference.resolve()?.getKotlinFqName()?.asString() == "com.elpassion.nspek.NSpekMethodContext.o") {
                         return Info(
                                 AllIcons.RunConfigurations.TestState.Run,
                                 TOOLTIP_PROVIDER,
