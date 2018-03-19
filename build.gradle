@@ -15,7 +15,7 @@ plugins {
 intellij {
     version = '181.4203.6'
     pluginName = "nspek-integration"
-    plugins = ['org.jetbrains.kotlin:1.2.30-release-IJ2018.1-1']
+    plugins = ['org.jetbrains.kotlin:1.2.30-release-IJ2018.1-1', 'junit']
     downloadSources = true
     updateSinceUntilBuild = false
 }
