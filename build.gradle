@@ -25,8 +25,8 @@ intellij {
 }
 
 publishPlugin {
-    username System.getProperty("JB_USERNAME") ?: ""
-    password System.getProperty("JB_PASSWORD") ?: ""
+    username System.env.JB_USERNAME ?: ""
+    password System.env.JB_PASSWORD ?: ""
     channels 'Stable'
 }
 
