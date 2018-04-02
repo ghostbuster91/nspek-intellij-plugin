@@ -4,13 +4,17 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "gradle.plugin.com.zoltu.gradle.plugin:git-versioning:2.0.21"
     }
 }
 
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.2.30'
     id "org.jetbrains.intellij" version "0.2.18"
+    id "com.zoltu.git-versioning" version "2.0.21"
 }
+
+version = version.replace("-0", "")
 
 intellij {
     version = '181.4203.6'
@@ -21,7 +25,6 @@ intellij {
 }
 
 group 'io.github.ghostbuster91'
-version '0.1'
 
 sourceCompatibility = 1.8
 
@@ -34,7 +37,7 @@ dependencies {
 }
 
 sourceSets {
-    main{
+    main {
         java {
             srcDir 'src/main/kotlin`'
         }
