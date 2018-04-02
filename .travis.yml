@@ -7,7 +7,7 @@ script:
 
 after_success:
 - mv build/distributions/nspek-integration-*.zip build/distributions/nspek-integration.zip
-- test "$TRAVIS_BRANCH" == "master" && ./gradlew publishPlugin -PpublishChannel=Stable
+- test "$TRAVIS_BRANCH" == "master" && ./gradlew publishPlugin
 
 env:
   global:

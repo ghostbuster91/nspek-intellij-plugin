@@ -24,6 +24,12 @@ intellij {
     updateSinceUntilBuild = false
 }
 
+publishPlugin {
+    username System.getProperty("JB_USERNAME") ?: ""
+    password System.getProperty("JB_PASSWORD") ?: ""
+    channels 'Stable'
+}
+
 group 'io.github.ghostbuster91'
 
 sourceCompatibility = 1.8
