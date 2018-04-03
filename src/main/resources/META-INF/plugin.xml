@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>io.ghostbuster91.nspek-intellij-plugin</id>
-    <name>NSpek Intellij Plugin</name>
+    <name>NSpek Integration</name>
     <vendor email="kghost0@gmail.com" url="http://github.com/ghostbuster91">Ghostbuster91</vendor>
     <idea-version since-build="162.0"/>
 
