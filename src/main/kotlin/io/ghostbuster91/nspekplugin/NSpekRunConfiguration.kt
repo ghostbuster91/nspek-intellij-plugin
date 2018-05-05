@@ -21,7 +21,6 @@ class NSpekRunConfiguration(name: String, javaRunConfigurationModule: Project, c
     }
 
     var testPath: String? = null
-        get() = field
         set(value) {
             vmParameters = "-DtestPath=\"$value\""
             field = value
