@@ -4,10 +4,21 @@
     <vendor email="kghost0@gmail.com" url="http://github.com/ghostbuster91">Ghostbuster91</vendor>
     <idea-version since-build="162.0"/>
 
-    <description>TBD</description>
+    <description><![CDATA[
+      This plugin makes integration with <a href="https://github.com/elpassion/NSpek">NSpek test framework</a>
+      easy and seamless.<br>
+      <br>
+      Plugin uses IntelliJ IDEA run configuration mechanism combined with static analysis of a code to provide options to run whichever
+      nspek test method you want.<br>
+      <br>
+      <h3>Features:</h3>
+        <ul>
+          <li>Run single branch of nspek tests</li>
+          <li>Save nspek configurations</li>
+        </ul>
+    ]]></description>
 
-    <change-notes>
-    </change-notes>
+    <change-notes>Initial release of the plugin.</change-notes>
 
     <depends>org.jetbrains.kotlin</depends>
     <depends>com.intellij.modules.lang</depends>
