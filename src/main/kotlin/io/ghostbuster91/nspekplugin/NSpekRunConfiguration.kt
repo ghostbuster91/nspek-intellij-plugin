@@ -10,6 +10,7 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleManager
 import com.intellij.openapi.options.SettingsEditor
 import com.intellij.openapi.project.Project
+import org.jdom.Element
 
 class NSpekRunConfiguration(name: String, project: Project, configurationFactory: ConfigurationFactory)
     : JUnitConfiguration(name, project, createData(), configurationFactory) {
@@ -23,7 +24,7 @@ class NSpekRunConfiguration(name: String, project: Project, configurationFactory
     }
 
     override fun getConfigurationEditor(): SettingsEditor<out RunConfiguration> {
-        return NSpekSettingsEditor(configurationModule, project)
+        return NSpekSettingsEditor(project)
     }
 
     override fun checkConfiguration() {
@@ -44,6 +45,32 @@ class NSpekRunConfiguration(name: String, project: Project, configurationFactory
         }
 
     override fun suggestedName(): String? = testPath
+
+    override fun writeExternal(element: Element) {
+        super.writeExternal(element)
+        testPath?.let {
+            val testPathElement = Element("testPath")
+            testPathElement.setAttribute("value", it)
+            element.addContent(testPathElement)
+        }
+
+        configurationModule.module?.let {
+            val moduleNameElement = Element("moduleName")
+            moduleNameElement.setAttribute("value", it.name)
+            element.addContent(moduleNameElement)
+        }
+    }
+
+    override fun readExternal(element: Element) {
+        super.readExternal(element)
+        element.getChild("testPath")?.getAttributeValue("value")?.let {
+            testPath = it
+        }
+        element.getChild("moduleName")?.getAttributeValue("value")?.let {
+            configurationModule.setModuleName(it)
+        }
+    }
+
 }
 
 private fun createData() = JUnitConfiguration.Data().apply {
